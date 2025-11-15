@@ -1,0 +1,158 @@
+# Mi Receta App 🍳
+
+Una aplicación web moderna para crear, compartir y gestionar recetas de cocina. Los usuarios pueden registrarse, crear sus propias recetas, marcar favoritos, comentar y filtrar recetas por categorías.
+
+## Características principales
+
+✨ **Autenticación de usuarios**
+- Registro e inicio de sesión seguro con JWT
+- Gestión de sesiones persistentes
+
+🍽️ **Gestión de recetas**
+- Crear, editar y eliminar recetas propias
+- Subir imágenes optimizadas con Cloudinary
+- Detallar pasos, ingredientes, tiempo de preparación y porciones
+- Etiquetar recetas con categorías personalizadas
+
+❤️ **Sistema de favoritos**
+- Marcar/desmarcar recetas como favoritas
+- Ver todas tus recetas favoritas en una sección dedicada
+- Los favoritos se eliminan automáticamente cuando se borra una receta
+
+💬 **Comentarios**
+- Agregar comentarios a las recetas
+- Ver comentarios de otros usuarios con autor y fecha
+
+🔍 **Filtrado y búsqueda**
+- Filtrar recetas por categorías (tags)
+- Ver recetas por autor
+- Búsqueda rápida de recetas favoritas
+
+## Stack tecnológico
+
+### Frontend
+- **React 18** - Librería UI
+- **TypeScript** - Tipado estático
+- **Vite** - Bundler rápido
+- **TailwindCSS** - Estilos utilitarios
+- **React Router** - Enrutamiento
+- **React Hook Form** - Gestión de formularios
+- **TanStack Query (React Query)** - Gestión de estado del servidor
+- **Axios** - Cliente HTTP
+- **Sonner** - Notificaciones toast
+- **Zod** - Validación de esquemas
+
+### Backend
+- **Node.js** - Runtime JavaScript
+- **Express.js** - Framework web
+- **TypeScript** - Tipado estático
+- **MongoDB** - Base de datos NoSQL
+- **Mongoose** - ODM para MongoDB
+- **JWT** - Autenticación
+- **Cloudinary** - Almacenamiento y optimización de imágenes
+- **Multer** - Procesamiento de archivos
+- **Express Validator** - Validación de datos
+
+## Requisitos previos
+
+- Node.js v16+ y npm
+- MongoDB local o Atlas
+- Cuenta de Cloudinary (para upload de imágenes)
+
+## Instalación
+
+### Backend
+
+```bash
+cd backend
+npm install
+```
+
+Crea un archivo `.env` con:
+```
+PORT=3000
+MONGODB_URI=mongodb+srv://usuario:contraseña@cluster.mongodb.net/mirecetasapp
+JWT_SECRET=tu_jwt_secret_aqui
+CLOUDINARY_CLOUD_NAME=tu_cloud_name
+CLOUDINARY_API_KEY=tu_api_key
+CLOUDINARY_API_SECRET=tu_api_secret
+```
+
+```bash
+npm run dev
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Estructura del proyecto
+
+```
+MiRecetasApp/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/    # Lógica de negocio
+│   │   ├── models/         # Esquemas MongoDB
+│   │   ├── routes/         # Rutas API
+│   │   ├── middlewares/    # Middlewares (auth, uploads, validación)
+│   │   ├── config/         # Configuración (BD, Cloudinary)
+│   │   └── server.ts       # Punto de entrada
+│   └── package.json
+│
+└── frontend/
+    ├── src/
+    │   ├── components/     # Componentes reutilizables
+    │   ├── pages/          # Vistas principales
+    │   ├── services/       # Llamadas API
+    │   ├── types/          # Tipos TypeScript
+    │   ├── layouts/        # Layouts principales
+    │   ├── hook/           # Custom hooks
+    │   └── main.tsx        # Punto de entrada
+    └── package.json
+```
+
+## Uso
+
+1. Regístrate con tu email y contraseña
+2. Inicia sesión
+3. Crea una nueva receta completando:
+   - Título, tiempo de preparación, porciones
+   - Selecciona categorías (tags)
+   - Agrega pasos y ingredientes
+   - Sube una imagen de la receta
+4. Visualiza tus recetas en "Mis Recetas"
+5. Marca recetas como favoritas con el corazón
+6. Filtra recetas por categoría en la página principal
+7. Comenta en las recetas que te interesen
+
+## Endpoints API principales
+
+### Autenticación
+- `POST /api/auth/register` - Registrar usuario
+- `POST /api/auth/login` - Iniciar sesión
+- `GET /api/auth/me` - Obtener usuario actual
+
+### Recetas
+- `GET /api/recipes` - Obtener todas las recetas
+- `GET /api/recipes/:id` - Obtener receta por ID
+- `POST /api/recipes` - Crear receta (requiere auth)
+- `PUT /api/recipes/:id` - Editar receta (requiere auth)
+- `DELETE /api/recipes/:id` - Eliminar receta (requiere auth)
+- `POST /api/recipes/:id/favorite` - Marcar/desmarcar como favorito
+
+### Comentarios
+- `POST /api/recipes/:id/comments` - Agregar comentario (requiere auth)
+- `GET /api/recipes/:id/comments` - Obtener comentarios de una receta
+
+## Autor
+
+Juan Clemente - 2025
+
+## Licencia
+
+Todos los derechos reservados.
