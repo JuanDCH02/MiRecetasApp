@@ -13,23 +13,32 @@ export default function AddRecipeForm() {
 
     
     const {reset, handleSubmit, register, control, formState:{errors}} = useForm<CreateRecipeFormValues>({
-        defaultValues:{ 
-            steps: [''],
-            ingredients: [{ name: '', amount: 0, unit: 'gr' }] // inicializamos campos
+        defaultValues: {
+            title: '',
+            cookTime: 0,
+            portions: 0,
+            image: '',
+            tags: [],
+            steps: [{step: ''}],
+            ingredients: [{ name: '', amount: 0, unit: 'gr' }]
         }
-    });
+    })
 
     // FieldArray para pasos
-    const {fields: stepFields, append: appendStep, remove: removeStep} = useFieldArray({
-        control,
-        name:'steps'
-    });
-
+    const {
+      fields: stepFields, append: appendStep, remove: removeStep
+        } = useFieldArray<CreateRecipeFormValues, "steps">({
+      control,
+      name: "steps"
+    })
+    
     // FieldArray para ingredientes
-    const {fields: ingredientFields, append: appendIngredient, remove: removeIngredient} = useFieldArray({
-        control,
-        name:'ingredients'
-    });
+    const {
+      fields: ingredientFields, append: appendIngredient, remove: removeIngredient
+        } = useFieldArray<CreateRecipeFormValues, "ingredients">({
+      control,
+      name: "ingredients"
+    })
 
     const handleToggleTag = (tag: string) => {
         setSelectedTag(prev => {
@@ -137,7 +146,7 @@ export default function AddRecipeForm() {
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={() => appendStep('')}
+            <button type="button" onClick={() => appendStep({step: ''})}
                 className="text-indigo-500 font-bold text-lg block cursor-pointer"
                 >+ Añadir paso
             </button>
@@ -161,6 +170,7 @@ export default function AddRecipeForm() {
                         <option value="gr">gr</option>
                         <option value="ml">ml</option>
                         <option value="unidad">unidad</option>
+                        <option value="cucharada">cucharada</option>
                     </select>
                     <button type="button" onClick={() => removeIngredient(index)} 
                         className="text-red-600 font-bold text-2xl cursor-pointer"

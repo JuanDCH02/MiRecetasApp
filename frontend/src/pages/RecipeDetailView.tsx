@@ -38,7 +38,7 @@ export const RecipeDetailView = () => {
 
                     <div className="text-center my-10 space-y-4">
                         <ol>
-                            {data.steps.map((step, index) => (
+                            {data.steps.map(({step}, index) => (
                                 
                                 <li key={index}
                                     className="text-xl font-bold text-gray-500"

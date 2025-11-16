@@ -40,7 +40,7 @@ export const RecipeSchema = z.object({
     cookTime: z.number(),
     portions: z.number(),
     tags: z.array(z.string()),
-    steps: z.array(z.string()),
+    steps: z.array(z.object({ step: z.string() })),
     likesCount: z.number(),
     isLiked: z.boolean(),
     comments: z.array(CommentSchema),
@@ -64,7 +64,7 @@ export type Recipe = z.infer<typeof RecipeSchema>
 export type DashboardRecipe = z.infer<typeof DashboardRecipeSchema>
 export type RecipeCardType = Pick<Recipe, '_id'|'title'|'likesCount'|'cookTime'|'tags' | 'portions'|'isLiked'|'image' >
 export type RecipeCardProfile = Pick<Recipe, '_id'|'title'|'likesCount'|'cookTime'|'portions'|'image' >
-export type CreateRecipeFormValues = Pick<Recipe, 'title'|'cookTime'|'portions'|'steps'|'ingredients'|'image'>
+export type CreateRecipeFormValues = Pick<Recipe, 'title'|'cookTime'|'portions'|'steps'|'ingredients'|'image'|'tags'>
 
 //AUTH
 export const userSchema = z.object({
