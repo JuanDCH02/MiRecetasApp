@@ -23,7 +23,7 @@ export default function EditRecipeFormModal() {
 
     const {reset, handleSubmit, register, control, formState:{errors}} = useForm<CreateRecipeFormValues>({
         defaultValues:{ 
-            steps: data ? data.steps : [''],
+            steps: data ? data.steps : [{step: ''}],
             ingredients: data ? data.ingredients : [{ name: '', amount: 0, unit: 'gr' }] // inicializamos campos
         }
     })
@@ -148,7 +148,7 @@ export default function EditRecipeFormModal() {
                                 </button>
                             </div>
                         ))}
-                        <button type="button" onClick={() => appendStep('')}
+                        <button type="button" onClick={() => appendStep({step: ''})}
                             className="text-indigo-500 font-bold text-lg block cursor-pointer"
                             >+ Añadir paso
                         </button>
