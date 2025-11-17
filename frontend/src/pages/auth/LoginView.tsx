@@ -8,30 +8,25 @@ import { toast } from "sonner";
 
 export default function LoginView() {
 
-  const navigate = useNavigate()
-  const initialValues: UserLoginForm = {
-    email: '',
-    password: '',
-  }
-  const { register, handleSubmit,reset, formState: { errors } } = useForm({ defaultValues: initialValues })
-
-  const {mutate} = useMutation({
-      mutationFn: authenticate,
-      onError:(error)=> {
-          toast.error(error.message)
-      },
-      onSuccess:()=> {
-          toast.success('Iniciando sesión')
-          reset()
-          navigate('/')
-      }
-  })
-
-  const handleLogin = (formData: UserLoginForm) => mutate(formData)
+   const navigate = useNavigate()
+   const { register, handleSubmit,reset, formState: { errors } } = useForm<UserLoginForm>()
+   const {mutate} = useMutation({
+       mutationFn: authenticate,
+       onError:(error)=> {
+           toast.error(error.message)
+       },
+       onSuccess:()=> {
+           toast.success('Iniciando sesión')
+           reset()
+           navigate('/')
+       }
+   })
+   const handleLogin = (formData: UserLoginForm) => mutate(formData)
 
   return (
     <>
-        <p className="text-2xl font-light text-white mt-5">
+      
+         <p className="text-2xl font-light text-white mt-5">
             Llena el formulario para
             <span className=" text-teal-300 font-bold text-shadow-lg/20"> iniciar sesión</span>
         </p>
@@ -95,7 +90,7 @@ export default function LoginView() {
             className="text-center font-light text-white"
                 >¿No tienes una cuenta? Registrate aquí
             </Link>
-        </nav>
+      </nav> 
     </>
   )
 }
